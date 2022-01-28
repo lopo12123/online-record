@@ -46,6 +46,7 @@ export default defineComponent({
 #date-time-box {
     position: relative;
     width: 190px;
+    min-width: 190px;
     height: 40px;
     color: aqua;
     font-family: UniDream-LED;

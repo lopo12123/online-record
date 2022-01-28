@@ -13,6 +13,8 @@
         <div class="nav-bar-button" @click="goto('NPM')">
             NPM
         </div>
+
+        <music-player />
     </div>
 </template>
 
@@ -20,13 +22,14 @@
 import {defineComponent, Ref, ref} from "vue";
 import {useRouter} from "vue-router";
 import DateTimeBox from "@/components/Index/DateTimeBox.vue";
+import MusicPlayer from "@/components/Index/MusicPlayer.vue";
 
 type ButtonType = 'Home' | 'GitHub' | 'NPM'
 
 export default defineComponent({
     name: "NavBar",
     components: {
-        DateTimeBox
+        DateTimeBox, MusicPlayer
     },
     setup() {
         const router = useRouter()
@@ -66,21 +69,26 @@ export default defineComponent({
     align-items: center;
     justify-content: flex-start;
 
+    > *:not(:first-child) {
+        margin-left: 30px;
+    }
+
     > .nav-bar-button {
         position: relative;
         width: 80px;
+        min-width: 80px;
         height: 32px;
-        margin-left: 30px;
         text-align: center;
         line-height: 32px;
         border: solid 2px aqua;
         border-radius: 20px 5px 20px 5px;
-        font-size: 14px;
+        font-size: 16px;
+        font-family: "Curlz MT";
         user-select: none;
         cursor: pointer;
 
         &:hover {
-            opacity: 0.9;
+            opacity: 0.8;
         }
         opacity: 0.5;
     }
