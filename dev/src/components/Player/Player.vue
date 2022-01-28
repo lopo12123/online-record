@@ -1,6 +1,6 @@
 <template>
-    <div id="nav-bar">
-
+    <div id="player">
+        player here
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
-    name: "NavBar"
+    name: "Player"
 })
 </script>
 

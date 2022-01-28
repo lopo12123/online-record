@@ -1,20 +1,33 @@
 import { createWebHashHistory, RouteRecordRaw, RouterOptions } from "vue-router";
 
-import Home from "@/views/Home.vue";
+import Index from "@/views/Index.vue";
 
 const routes: RouteRecordRaw[] = [
     // region redirect
     {
         path: '/',
         redirect: {
-            name: 'Home'
+            name: 'Index'
         }
     },
     // endregion
     {
-        path: '/home',
-        name: 'Home',
-        component: Home
+        path: '/index',
+        name: 'Index',
+        component: Index,
+        children: [
+            {
+                path: '',
+                redirect: {
+                    name: 'Home'
+                }
+            },
+            {
+                path: 'home',
+                name: 'Home',
+                component: () => import("@/views/Home.vue")
+            }
+        ]
     }
 ]
 
