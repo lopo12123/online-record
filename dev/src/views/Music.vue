@@ -104,7 +104,6 @@ export default defineComponent({
         position: relative;
         width: 600px;
         height: calc(100% - 100px);
-        //border-radius: 5px;
         box-shadow: 10px 10px 50px 5px #00000033;
         background: none;
         display: block;
