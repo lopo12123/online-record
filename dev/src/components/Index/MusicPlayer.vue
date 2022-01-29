@@ -169,7 +169,7 @@ export default defineComponent({
         font-family: "Curlz MT";
         user-select: none;
         cursor: pointer;
-        opacity: 0.5;
+        opacity: 1;
         &:hover {
             opacity: 0.8;
         }
