@@ -1,8 +1,9 @@
 <template>
     <div id="nav-bar">
+
         <date-time-box />
 
-        <div class="nav-bar-button">
+        <div class="nav-bar-button" @click="goto('Home')">
             Home
         </div>
 
@@ -15,6 +16,7 @@
         </div>
 
         <music-player />
+
     </div>
 </template>
 
@@ -38,7 +40,7 @@ export default defineComponent({
         const goto = (to: ButtonType) => {
             switch(to) {
                 case "Home":
-                    router.push({ path: '/' })
+                    router.push({ name: 'Home' })
                     break
                 case "GitHub":
                     window.open('https://github.com/lopo12123')

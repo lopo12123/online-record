@@ -1,54 +1,123 @@
 <template>
     <div id="music-player">
+        <!-- region hidden audio -->
+        <audio ref="audioRef" :src="audioSrc" autoplay
+               @timeupdate="updateProgress" @ended="doOperate('Next')"
+               style="display: none" />
+        <!-- endregion -->
+
+        <!-- region audio controls -->
         <div class="show-progress">
-            <el-progress :percentage="30" color="#00ffff"
-                         :stroke-width="3" :show-text="false" />
+            <el-progress :percentage="playProgress" color="#00ffff"
+                         :stroke-width="3" :show-text="false"
+                         :style="`opacity: ${playState === 'Playing' ? '0.8' : '0.5'}`"/>
         </div>
+        <span class="player-logo" title="点击前往音乐界面" @click="doOperate('Jump')">lopo</span>
         <i class="iconfont icon-shangyishoushangyige" @click="doOperate('Prev')" />
-        <i class="iconfont icon-24gl-pause" @click="doOperate('Pause')" />
-        <i class="iconfont icon-24gl-play" @click="doOperate('Play')" />
+        <i :class="['iconfont', 'icon-24gl-pause', {'i-active': playState === 'Pause'}]" @click="doOperate('Pause')" />
+        <i :class="['iconfont', 'icon-24gl-play', {'i-active': playState === 'Playing'}]" @click="doOperate('Play')" />
         <i class="iconfont icon-shangyishoushangyige1" @click="doOperate('Next')" />
+        <!-- endregion -->
+
+        <!-- region one note dialog -->
+        <el-dialog
+            v-if="visible" v-model="visible" width="fit-content"
+            :show-close="false" :destroy-on-close="true"
+            @close="oneNoteClose">
+            <div class="one-note">
+                <div>{{ noteStr }}</div>
+                <br>
+                <div style="text-align: right">{{ fromStr }}</div>
+            </div>
+            <template #footer>
+                <div class="close-info">
+                    Click anywhere else to close.
+                </div>
+            </template>
+        </el-dialog>
+        <!-- endregion -->
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from "vue";
-import { ElProgress } from "element-plus";
+import {defineComponent, Ref, ref} from "vue";
+import { ElProgress, ElDialog } from "element-plus";
+import { music } from "../../../public/manifest.json";
+import {useRouter} from "vue-router";
 
 type PlayState = 'Playing' | 'Pause'
-type OperateButton = 'Play' | 'Pause' | 'Prev' | 'Next'
+type OperateButton = 'Jump' | 'Play' | 'Pause' | 'Prev' | 'Next'
 
 export default defineComponent({
     name: "MusicPlayer",
     components: {
-        ElProgress
+        ElProgress, ElDialog
     },
     setup() {
+        const router = useRouter()
+
+        let playIndex = 0  // the index of current played song
+        const audioRef: Ref<HTMLAudioElement|null> = ref(null)
+        const audioSrc = ref(music[0].path)
+
         const playState: Ref<PlayState> = ref('Playing')
         const playProgress: Ref<number> = ref(0)
 
+        const updateProgress = (e: any) => {
+            playProgress.value = parseInt((e.target.currentTime * 100 / e.target.duration).toFixed(0))
+            playProgress.value = isNaN(playProgress.value) ? 0 :playProgress.value
+        }
         const doOperate = (op: OperateButton) => {
+            if(!audioRef.value) return
             switch(op) {
-                case "Prev":
-                    console.log('prev')
+                case "Jump":
+                    router.push({ name: 'Music' })
                     break
-                case "Pause":
-                    // do pause
+                case "Prev":  // do prev
+                    playIndex = (playIndex === 0) ? (music.length - 1) : (playIndex - 1)
+                    audioSrc.value = music[playIndex].path
+                    break
+                case "Pause":  // do pause
+                    audioRef.value!.pause()
                     playState.value = 'Pause'
                     break
-                case "Play":
-                    // do play
+                case "Play":  // do play
                     playState.value = 'Playing'
+                    audioRef.value!.play()
                     break
-                case "Next":
-                    console.log('next')
+                case "Next":  // do next
+                    playIndex = (playIndex === music.length - 1) ? 0 : (playIndex + 1)
+                    playProgress.value = 0
+                    audioRef.value!.src = music[playIndex].path
                     break
             }
         }
 
+        // region one note
+        const visible = ref(true)
+        const noteStr = ref('')
+        const fromStr = ref('')
+        // fetch('https://v1.hitokoto.cn?c=d&c=k')
+        //     .then((buf) => buf.json())
+        //     .then((res) => {
+        //         let { hitokoto, from, from_who } = res
+        //         noteStr.value = hitokoto
+        //         fromStr.value = (from ? '-- '+from : '') + (from_who ? '《'+from_who+'》' : '')
+        //         visible.value = true
+        //     })
+        //     .catch(() => { /** error */ })
+        const oneNoteClose = () => {
+            console.log('closed one note')
+            doOperate('Play')
+            // start music
+        }
+        // endregion
+
         return {
+            audioRef, audioSrc,
             playState, playProgress,
-            doOperate,
+            updateProgress, doOperate,
+            visible, noteStr, fromStr, oneNoteClose
         }
     }
 })
@@ -59,7 +128,6 @@ export default defineComponent({
     position: relative;
     width: 200px;
     height: 40px;
-    //border: solid 1px red;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -70,7 +138,17 @@ export default defineComponent({
         height: 3px;
         bottom: -3px;
         left: 0;
+    }
+
+    > .player-logo {
+        color: aqua;
+        font-family: "Curlz MT";
+        user-select: none;
+        cursor: pointer;
         opacity: 0.5;
+        &:hover {
+            opacity: 0.8;
+        }
     }
 
     > i {
@@ -90,33 +168,24 @@ export default defineComponent({
             opacity: 0.8;
         }
     }
+    .i-active {
+        opacity: 0.8;
+    }
 
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-            border-color: #909399;
-            color: #909399;
-        }
-        25% {
-            transform: rotate(90deg);
-            border-color: #67c23a;
-            color: #67c23a;
-        }
-        50% {
-            transform: rotate(180deg);
-            border-color: #e6a23c;
-            color: #e6a23c;
-        }
-        75% {
-            transform: rotate(270deg);
-            border-color: #f56c6c;
-            color: #f56c6c;
-        }
-        100% {
-            transform: rotate(360deg);
-            border-color: #909399;
-            color: #909399;
-        }
+    .one-note {
+        position: relative;
+        width: 300px;
+        padding: 20px 30px;
+        background-color: #343434;
+        border-radius: 10px;
+        color: #00ffff;
+    }
+    .close-info {
+        position: relative;
+        text-align: center;
+        font-size: 14px;
+        color: #00ffff80;
+        user-select: none;
     }
 }
 </style>
