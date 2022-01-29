@@ -1,5 +1,5 @@
 // 滚动条样式
-@mixin scrollBarStyle($color: #cccccc) {
+@mixin scrollBarStyle($color: #dddddd) {
     &::-webkit-scrollbar {
         width: 8px!important;
         height: 8px!important;
