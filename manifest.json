@@ -1,0 +1,48 @@
+{
+    "music": [
+        {
+            "name": "beauty",
+            "path": "/music/beauty.mp3"
+        },
+        {
+            "name": "calling",
+            "path": "/music/calling.mp3"
+        },
+        {
+            "name": "dark&moody",
+            "path": "/music/dark&moody.mp3"
+        },
+        {
+            "name": "forgiven",
+            "path": "/music/forgiven.mp3"
+        },
+        {
+            "name": "holy",
+            "path": "/music/holy.mp3"
+        },
+        {
+            "name": "paradise",
+            "path": "/music/paradise.mp3"
+        },
+        {
+            "name": "preasure",
+            "path": "/music/preasure.mp3"
+        },
+        {
+            "name": "run",
+            "path": "/music/run.mp3"
+        },
+        {
+            "name": "the_one",
+            "path": "/music/the_one.mp3"
+        },
+        {
+            "name": "the_otherside",
+            "path": "/music/the_otherside.mp3"
+        },
+        {
+            "name": "youth",
+            "path": "/music/youth.mp3"
+        }
+    ]
+}
