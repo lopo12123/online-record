@@ -45,6 +45,12 @@ import { ElProgress, ElDialog } from "element-plus";
 import { music } from "../../../public/manifest.json";
 import {useRouter} from "vue-router";
 
+type NoteObj = {
+    dateString: string  // xxxx/xx/xx
+    hitokoto: string
+    from: string |null
+    from_who: string | null
+}
 type PlayState = 'Playing' | 'Pause'
 type OperateButton = 'Jump' | 'Play' | 'Pause' | 'Prev' | 'Next'
 
@@ -56,6 +62,7 @@ export default defineComponent({
     setup() {
         const router = useRouter()
 
+        // region play pointer and progress and operates
         let playIndex = 0  // the index of current played song
         const audioRef: Ref<HTMLAudioElement|null> = ref(null)
         const audioSrc = ref(music[0].path)
@@ -92,24 +99,41 @@ export default defineComponent({
                     break
             }
         }
+        // endregion
 
         // region one note
         const visible = ref(true)
         const noteStr = ref('')
         const fromStr = ref('')
-        // fetch('https://v1.hitokoto.cn?c=d&c=k')
-        //     .then((buf) => buf.json())
-        //     .then((res) => {
-        //         let { hitokoto, from, from_who } = res
-        //         noteStr.value = hitokoto
-        //         fromStr.value = (from ? '-- '+from : '') + (from_who ? '《'+from_who+'》' : '')
-        //         visible.value = true
-        //     })
-        //     .catch(() => { /** error */ })
+        const noteStorage = localStorage.getItem('oneNote')  // last note
+        try {
+            if(!noteStorage) throw new Error('no storage')
+            const noteObj = JSON.parse(noteStorage)
+            if(noteObj.dateString !== new Date().toLocaleDateString()) throw new Error('out of date')
+            let { hitokoto, from, from_who } = noteObj
+            noteStr.value = hitokoto
+            fromStr.value = (from ? '-- '+from : '') + (from_who ? '《'+from_who+'》' : '')
+            visible.value = true
+        }
+        catch (e) {
+            fetch('https://v1.hitokoto.cn?c=d&c=k')
+                .then((buf) => buf.json())
+                .then((res) => {
+                    let { hitokoto, from, from_who } = res
+                    noteStr.value = hitokoto
+                    fromStr.value = (from ? '-- '+from : '') + (from_who ? '《'+from_who+'》' : '')
+                    visible.value = true
+                    localStorage.setItem('oneNote', JSON.stringify({
+                        dateString: new Date().toLocaleDateString(),
+                        hitokoto: hitokoto,
+                        from: from,
+                        from_who: from_who
+                    } as NoteObj))
+                })
+                .catch(() => { /** error */ })
+        }
         const oneNoteClose = () => {
-            console.log('closed one note')
             doOperate('Play')
-            // start music
         }
         // endregion
 
