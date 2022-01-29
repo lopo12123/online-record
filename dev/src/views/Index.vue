@@ -37,8 +37,7 @@ export default defineComponent({
     > .body-container {
         position: relative;
         width: 100%;
-        height: calc(100% - 100px);
-        margin-top: 20px;
+        height: calc(100% - 60px);
     }
 }
 </style>
