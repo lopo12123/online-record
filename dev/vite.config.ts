@@ -9,6 +9,13 @@ export default defineConfig({
         alias: {
             '@': resolve('src')
         }
+    },
+    server: {
+        host: '127.0.0.1',
+        port: 8080
+    },
+    build: {
+        outDir: '../docs'
     }
 })
 
