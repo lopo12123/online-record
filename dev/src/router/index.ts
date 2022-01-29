@@ -31,6 +31,14 @@ const routes: RouteRecordRaw[] = [
     }
 ]
 
+if(process.env.NODE_ENV === 'development') {
+    routes[1].children?.push({
+        path: '/test',
+        name: 'TestPage',
+        component: () => import('@/test/TestPage.vue')
+    })
+}
+
 export const router: RouterOptions = {
     history: createWebHashHistory(),
     routes
