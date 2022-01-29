@@ -1,6 +1,8 @@
 <template>
     <div id="nav-bar">
 
+        <music-player />
+
         <date-time-box />
 
         <div class="nav-bar-button" @click="goto('Home')">
@@ -14,8 +16,6 @@
         <div class="nav-bar-button" @click="goto('NPM')">
             NPM
         </div>
-
-        <music-player />
 
     </div>
 </template>
