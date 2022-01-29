@@ -56,14 +56,14 @@ export default defineComponent({
         }
         const doDownload = (path: string | 'selected', name: string) => {
             if(path === 'selected') {
-                console.log(selectedList)
                 ElMessage({
                     type: 'warning',
                     message: 'not support yet'
                 })
+                // todo solve this with jsZip
+                console.log(selectedList)
             }
             else {
-                console.log(path)
                 const aTag = document.createElement('a')
                 aTag.download = name+'.mp3'
                 aTag.target = '_blank'
