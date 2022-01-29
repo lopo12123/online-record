@@ -2,47 +2,58 @@
     "music": [
         {
             "name": "beauty",
-            "path": "./music/beauty.mp3"
+            "path": "./music/beauty.mp3",
+            "size": "3.08MB"
         },
         {
             "name": "calling",
-            "path": "./music/calling.mp3"
+            "path": "./music/calling.mp3",
+            "size": "2.97MB"
         },
         {
             "name": "dark&moody",
-            "path": "./music/dark&moody.mp3"
+            "path": "./music/dark&moody.mp3",
+            "size": "3.04MB"
         },
         {
             "name": "forgiven",
-            "path": "./music/forgiven.mp3"
+            "path": "./music/forgiven.mp3",
+            "size": "3.01MB"
         },
         {
             "name": "holy",
-            "path": "./music/holy.mp3"
+            "path": "./music/holy.mp3",
+            "size": "3.15MB"
         },
         {
             "name": "paradise",
-            "path": "./music/paradise.mp3"
+            "path": "./music/paradise.mp3",
+            "size": "2.83MB"
         },
         {
             "name": "preasure",
-            "path": "./music/preasure.mp3"
+            "path": "./music/preasure.mp3",
+            "size": "3.13MB"
         },
         {
             "name": "run",
-            "path": "./music/run.mp3"
+            "path": "./music/run.mp3",
+            "size": "3.13MB"
         },
         {
             "name": "the_one",
-            "path": "./music/the_one.mp3"
+            "path": "./music/the_one.mp3",
+            "size": "2.66MB"
         },
         {
             "name": "the_otherside",
-            "path": "./music/the_otherside.mp3"
+            "path": "./music/the_otherside.mp3",
+            "size": "3.33MB"
         },
         {
             "name": "youth",
-            "path": "./music/youth.mp3"
+            "path": "./music/youth.mp3",
+            "size": "3.11MB"
         }
     ]
 }
