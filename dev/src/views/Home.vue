@@ -1,6 +1,6 @@
 <template>
     <div id="home">
-        <img class="home-bg" src="@/assets/home-bg.png" alt>
+        <img class="home-bg" src="@/assets/home-bg.png" alt="">
         <el-container class="home-container">
             <el-aside class="left-panel">
                 <div class="calendar-container">

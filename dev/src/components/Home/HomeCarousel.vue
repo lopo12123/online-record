@@ -1,15 +1,15 @@
 <template>
     <el-carousel id="home-carousel" height="350px">
         <el-carousel-item class="carousel-item">
-            <img src="@/assets/unmasked.png" alt>
+            <img src="@/assets/unmasked.png" alt="">
         </el-carousel-item>
 
         <el-carousel-item class="carousel-item">
-            <img src="@/assets/holy.png" alt>
+            <img src="@/assets/holy.png" alt="">
         </el-carousel-item>
 
         <el-carousel-item class="carousel-item">
-            <img src="@/assets/a-game.png" alt>
+            <img src="@/assets/a-game.png" alt="">
         </el-carousel-item>
     </el-carousel>
 </template>

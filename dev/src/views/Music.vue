@@ -1,6 +1,6 @@
 <template>
     <div id="music">
-        <img class="music-bg" src="@/assets/pointAndLine.png" alt>
+        <img class="music-bg" src="@/assets/pointAndLine.png" alt="">
         <div class="music-list-container">
             <el-table height="100%" row-class-name="my-table-row"
                       size="small" :data="listData"
