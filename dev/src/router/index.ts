@@ -15,13 +15,10 @@ const routes: RouteRecordRaw[] = [
         path: '/index',
         name: 'Index',
         component: Index,
+        redirect: {
+            name: 'Home'
+        },
         children: [
-            {
-                path: '',
-                redirect: {
-                    name: 'Home'
-                }
-            },
             {
                 path: 'home',
                 name: 'Home',
