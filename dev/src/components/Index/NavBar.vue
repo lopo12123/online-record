@@ -1,5 +1,8 @@
 <template>
     <div id="nav-bar">
+        <div class="version-info">
+            v {{ _version }}
+        </div>
 
         <music-player />
 
@@ -16,15 +19,15 @@
         <div class="nav-bar-button" @click="goto('NPM')">
             NPM
         </div>
-
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, Ref, ref} from "vue";
-import {useRouter} from "vue-router";
+import { defineComponent, Ref, ref } from "vue";
+import { useRouter } from "vue-router";
 import DateTimeBox from "@/components/Index/DateTimeBox.vue";
 import MusicPlayer from "@/components/Index/MusicPlayer.vue";
+import { version } from "../../../package.json";
 
 type ButtonType = 'Home' | 'GitHub' | 'NPM'
 
@@ -35,6 +38,7 @@ export default defineComponent({
     },
     setup() {
         const router = useRouter()
+        const _version = version
 
         const currentActive: Ref<ButtonType> = ref('Home')
         const goto = (to: ButtonType) => {
@@ -52,6 +56,7 @@ export default defineComponent({
         }
 
         return {
+            _version,
             currentActive, goto
         }
     }
@@ -73,6 +78,12 @@ export default defineComponent({
 
     > *:not(:first-child) {
         margin-left: 30px;
+    }
+
+    > .version-info {
+        font-size: 14px;
+        font-family: "UniDream-LED";
+        user-select: none;
     }
 
     > .nav-bar-button {
