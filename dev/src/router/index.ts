@@ -1,20 +1,20 @@
 import { createWebHashHistory, RouteRecordRaw, RouterOptions } from "vue-router";
 
-import Index from "@/views/Index.vue";
+import PC from "@/views/PC.vue";
 
 const routes: RouteRecordRaw[] = [
     // region redirect
     {
         path: '/',
         redirect: {
-            name: 'Index'
+            name: 'PC'
         }
     },
     // endregion
     {
-        path: '/index',
-        name: 'Index',
-        component: Index,
+        path: '/pc',
+        name: 'PC',
+        component: PC,
         redirect: {
             name: 'Home'
         },
@@ -34,7 +34,7 @@ const routes: RouteRecordRaw[] = [
 ]
 
 if(process.env.NODE_ENV === 'development') {
-    routes[1].children?.push({
+    routes.push({
         path: '/test',
         name: 'TestPage',
         component: () => import('@/test/TestPage.vue')
