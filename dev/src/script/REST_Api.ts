@@ -2,6 +2,11 @@ import axios from "axios";
 import { Buffer } from "buffer";
 import { userName, repoName, token } from "../../public/manifest.json";
 
+interface CommentItem {
+    date: string
+    author: string
+    comment: string
+}
 // region [GET] /repos/{owner}/{repo}/branches/{branch}
 /**
  * @description details of branch <br/>
@@ -65,7 +70,6 @@ interface BranchDetail {
     "protection_url": string
 }
 // endregion
-
 // region [GET] /repos/{owner}/{repo}/git/blobs/{file_sha}
 /**
  * @description the content in the response will always be Base64 encoded <br/>
@@ -81,7 +85,6 @@ interface FileInfo {
     url: string
 }
 // endregion
-
 // region [GET] /repos/{username}/{repo}/git/trees/{tree_sha}
 /**
  * @description `[GET] /repos/{username}/{repo}/git/trees/{tree_sha}` <br/>
@@ -113,7 +116,7 @@ const AxiosConfig = {
 }
 const _GET = (url: string): Promise<any> => {
     return new Promise((resolve, reject) => {
-        axios.get(url, AxiosConfig)
+        axios.get(url, {...AxiosConfig, params: { timestamp: Date.now() }})
             .then(({data}) => {
                 resolve(data)
             })
@@ -147,7 +150,6 @@ const _Base64 = (ori: string | Buffer, type: 'encode' | 'decode') => {
  */
 const getTargetFileJson = (fileName: string): Promise<{ fileJson: string, fileSha: string }> => {
     let fileSha: string
-
     return _GET(`/repos/${userName}/${repoName}/branches/master`)
         .then((branch_detail: BranchDetail) => {
             return _GET(`repos/${userName}/${repoName}/git/trees/${branch_detail.commit.commit.tree.sha}`)
@@ -171,7 +173,7 @@ const getTargetFileJson = (fileName: string): Promise<{ fileJson: string, fileSh
 /**
  * @description set target file
  */
-const setTargetFileJson = (fileName: string, fileSha: string, fileJson: string) => {
+const setTargetFileJson = (fileName: string, fileJson: string, fileSha: string) => {
     const body = {
         message: '',
         content: _Base64(fileJson, 'encode').toString(),
@@ -180,7 +182,19 @@ const setTargetFileJson = (fileName: string, fileSha: string, fileJson: string) 
     return _PUT(`/repos/${userName}/${repoName}/contents/${fileName}`, body)
 }
 
+/**
+ * @description add new comment
+ * @param newItem
+ */
+const appendComment = (newItem: CommentItem) => {
+    return getTargetFileJson('comment.json')
+        .then(({fileJson, fileSha}) => {
+            let list: CommentItem[] = JSON.parse(fileJson)
+            list.push(newItem)
+            return setTargetFileJson('comment.json', JSON.stringify(list), fileSha)
+        })
+}
 export {
-    getTargetFileJson,
-    setTargetFileJson
+    getTargetFileJson,setTargetFileJson,
+    appendComment
 }
