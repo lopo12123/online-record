@@ -11,7 +11,11 @@
                 </div>
             </el-aside>
             <el-main>
-                main
+                these are buttons click to jump
+                <span>todos: </span> <br>
+                <span>1. cost record </span> <br>
+                <span>2. image resize </span> <br>
+                <span>... </span>
             </el-main>
         </el-container>
     </div>
