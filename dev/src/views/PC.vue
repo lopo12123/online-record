@@ -1,5 +1,5 @@
 <template>
-    <div id="index">
+    <div id="PC">
         <div class="nav-bar-container">
             <nav-bar />
         </div>
@@ -12,10 +12,10 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import NavBar from "@/components/Index/NavBar.vue";
+import NavBar from "@/components/PC/NavBar.vue";
 
 export default defineComponent({
-    name: "Index",
+    name: "PC",
     components: {
         NavBar
     }
@@ -23,7 +23,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-#index {
+#PC {
     position: relative;
     width: 100%;
     height: 100%;

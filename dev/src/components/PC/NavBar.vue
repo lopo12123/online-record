@@ -25,8 +25,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import DateTimeBox from "@/components/Index/DateTimeBox.vue";
-import MusicPlayer from "@/components/Index/MusicPlayer.vue";
+import DateTimeBox from "@/components/PC/DateTimeBox.vue";
+import MusicPlayer from "@/components/PC/MusicPlayer.vue";
 import { version } from "../../../package.json";
 
 type ButtonType = 'Home' | 'GitHub' | 'NPM'
