@@ -1,8 +1,9 @@
 <template>
     <div id="music-player">
         <!-- region hidden audio -->
-        <audio ref="audioRef" :src="audioSrc" autoplay
-               @timeupdate="updateProgress" @ended="doOperate('Next')"
+        <audio ref="audioRef" :src="audioSrc"
+               @timeupdate="updateProgress"
+               @ended="doOperate('Next')"
                style="display: none" />
         <!-- endregion -->
 
@@ -67,7 +68,7 @@ export default defineComponent({
         const audioRef: Ref<HTMLAudioElement|null> = ref(null)
         const audioSrc = ref(music[0].path)
 
-        const playState: Ref<PlayState> = ref('Playing')
+        const playState: Ref<PlayState> = ref('Pause')
         const playProgress: Ref<number> = ref(0)
 
         const updateProgress = (e: any) => {
@@ -133,7 +134,7 @@ export default defineComponent({
                 .catch(() => { /** error */ })
         }
         const oneNoteClose = () => {
-            doOperate('Play')
+            // doOperate('Play')
         }
         // endregion
 
