@@ -1,8 +1,8 @@
 <template>
-    <div class="timeline-comment">
-        <el-timeline class="comment-list"
-                     v-loading="loading"
-                     element-loading-background="transparent">
+    <div class="timeline-comment"
+         v-loading="loading"
+         element-loading-background="#00000033">
+        <el-timeline class="comment-list">
             <el-timeline-item
                 v-for="item in comments" :key="item.date"
                 :timestamp="item.date" color="#cccccc">
@@ -73,8 +73,8 @@ export default defineComponent({
             }
 
             const newComment = {
-                date: new Date().toJSON().replace('T', ' ').slice(0, 19),
-                author: commentAuthor.value,
+                date: new Date().toLocaleString('zh-cn', {hour12: false}),
+                author: commentAuthor.value.trim() === '' ? 'Anonymous' : commentAuthor.value,
                 comment: commentText.value
             }
             commentAuthor.value = ''
