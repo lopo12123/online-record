@@ -111,7 +111,7 @@ const AxiosConfig = {
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/vnd.github.v3.full+json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ghp_${token}`
     }
 }
 const _GET = (url: string): Promise<any> => {
