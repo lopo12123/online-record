@@ -3,11 +3,11 @@
         <img class="home-bg" src="@/assets/home-bg.png" alt="">
         <el-container class="home-container">
             <el-aside class="left-panel">
-                <div class="calendar-container">
-                    <el-calendar />
-                </div>
                 <div class="carousel-container">
                     <home-carousel />
+                </div>
+                <div class="message-board-container">
+                    <timeline-comment />
                 </div>
             </el-aside>
             <el-main>
@@ -19,14 +19,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ElContainer, ElAside, ElMain, ElCalendar } from "element-plus";
+import { ElContainer, ElAside, ElMain } from "element-plus";
 import HomeCarousel from "@/components/Home/HomeCarousel.vue";
+import TimelineComment from "@/components/Home/TimelineComment.vue";
 
 export default defineComponent({
     name: "Home",
     components: {
-        ElContainer, ElAside, ElMain, ElCalendar,
-        HomeCarousel
+        ElContainer, ElAside, ElMain,
+        HomeCarousel, TimelineComment
     },
     setup() {
 
@@ -60,8 +61,8 @@ export default defineComponent({
     .home-container {
         position: relative;
         width: 100%;
-        height: calc(100% - 10px);
-        margin-top: 10px;
+        height: calc(100% - 20px);
+        margin-top: 20px;
 
         .left-panel {
             @include scrollBarStyle();
@@ -70,16 +71,17 @@ export default defineComponent({
             height: 100%;
             overflow-x: hidden;
 
-            .calendar-container {
-                position: relative;
-                width: 300px;
-                height: 300px;
-            }
-
             .carousel-container {
                 position: relative;
                 width: 300px;
                 height: 350px;
+            }
+
+            .message-board-container {
+                position: relative;
+                width: 300px;
+                height: calc(100% - 360px);
+                margin-top: 10px;
             }
         }
     }
