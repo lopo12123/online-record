@@ -1,6 +1,6 @@
 <template>
     <div id="mobile">
-        mobile view here
+        mobile view here (todos in the schedule)
     </div>
 </template>
 
@@ -13,5 +13,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
+#mobile {
+    color: rgba(0, 0, 0, 0.8);
+}
 </style>
