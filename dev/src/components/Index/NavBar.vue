@@ -1,7 +1,7 @@
 <template>
     <div id="nav-bar">
         <div class="version-info">
-            v {{ _version }}
+            v {{ version }}
         </div>
 
         <music-player />
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from "vue";
+import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import DateTimeBox from "@/components/Index/DateTimeBox.vue";
 import MusicPlayer from "@/components/Index/MusicPlayer.vue";
@@ -38,9 +38,7 @@ export default defineComponent({
     },
     setup() {
         const router = useRouter()
-        const _version = version
 
-        const currentActive: Ref<ButtonType> = ref('Home')
         const goto = (to: ButtonType) => {
             switch(to) {
                 case "Home":
@@ -56,8 +54,8 @@ export default defineComponent({
         }
 
         return {
-            _version,
-            currentActive, goto
+            version,
+            goto
         }
     }
 })
