@@ -64,9 +64,9 @@ export default defineComponent({
         const router = useRouter()
 
         // region play pointer and progress and operates
-        let playIndex = 0  // the index of current played song
+        let playIndex = parseInt(Math.random() * music.length)  // the index of current played song
         const audioRef: Ref<HTMLAudioElement|null> = ref(null)
-        const audioSrc = ref(music[0].path)
+        const audioSrc = ref(music[playIndex].path)
 
         const playState: Ref<PlayState> = ref('Pause')
         const playProgress: Ref<number> = ref(0)
