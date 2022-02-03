@@ -1,12 +1,8 @@
+import { v4 as UUID } from "uuid";
 import axios from "axios";
 import { Buffer } from "buffer";
 import { userName, repoName, token } from "../../public/manifest.json";
 
-interface CommentItem {
-    date: string
-    author: string
-    comment: string
-}
 // region [GET] /repos/{owner}/{repo}/branches/{branch}
 /**
  * @description details of branch <br/>
@@ -173,15 +169,57 @@ const getTargetFileJson = (fileName: string): Promise<{ fileJson: string, fileSh
 /**
  * @description set target file
  */
-const setTargetFileJson = (fileName: string, fileJson: string, fileSha: string) => {
-    const body = {
+const setTargetFileJson = (fileName: string, fileJson: string, fileSha?: string) => {
+    const body: {
+        message: string,
+        content: string
+        sha?: string
+    } = {
         message: '',
-        content: _Base64(fileJson, 'encode').toString(),
-        sha: fileSha
+        content: _Base64(fileJson, 'encode').toString()
+    }
+    if(fileSha) {
+        body.sha = fileSha
     }
     return _PUT(`/repos/${userName}/${repoName}/contents/${fileName}.json`, body)
 }
 
+// region user manage
+interface UserItem {
+    account: string
+    password: string
+    token: string
+}
+const getAllUsers = (): Promise<UserItem[]> => {
+    return getTargetFileJson('user')
+        .then(({ fileJson }) => {
+            return Promise.resolve(JSON.parse(fileJson))
+        })
+}
+const addNewUser = (newUser: { account: string, password: string, token: string }) => {
+    return getTargetFileJson('user')
+        .then(({ fileJson, fileSha }) => {
+            let userList: UserItem[] = JSON.parse(fileJson)
+
+            let exist = userList.find((item) => {
+                return (item.account === newUser.account) && (item.password === newUser.password)
+            })
+            if(!!exist) throw new Error('EConflict')
+
+            userList.push(newUser)
+            return setTargetFileJson('user', JSON.stringify(userList), fileSha)
+        })
+}
+// endregion
+
+
+
+
+interface CommentItem {
+    date: string
+    author: string
+    comment: string
+}
 /**
  * @description add new comment
  * @param newItem
@@ -194,7 +232,12 @@ const appendComment = (newItem: CommentItem) => {
             return setTargetFileJson('comment.json', JSON.stringify(list), fileSha)
         })
 }
+
 export {
     getTargetFileJson,setTargetFileJson,
+
+    getAllUsers, addNewUser,
+
+
     appendComment
 }
