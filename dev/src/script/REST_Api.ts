@@ -211,6 +211,32 @@ const addNewUser = (newUser: { account: string, password: string, token: string 
 }
 // endregion
 
+// region record manage
+interface RecordItem {
+    value: string
+    date: string
+    flow: 'IN' | 'OUT'
+    type: string
+    note: string
+}
+const initRecordDatabase = (userToken: string) => {
+    return setTargetFileJson(userToken, JSON.stringify([]))
+}
+const getAllRecords = (userToken: string): Promise<RecordItem[]> => {
+    return getTargetFileJson(userToken)
+        .then(({ fileJson }) => {
+            return Promise.resolve(JSON.parse(fileJson))
+        })
+}
+const addRecords = (userToken: string, newRecord: RecordItem) => {
+    return getTargetFileJson(userToken)
+        .then(({ fileJson, fileSha }) => {
+            let recordList: RecordItem[] = JSON.parse(fileJson)
+            recordList.push(newRecord)
+            return setTargetFileJson(userToken, JSON.stringify(recordList), fileSha)
+        })
+}
+// endregion
 
 
 
@@ -235,8 +261,11 @@ const appendComment = (newItem: CommentItem) => {
 export {
     getTargetFileJson,setTargetFileJson,
 
+    // user manage
     getAllUsers, addNewUser,
 
+    // record manage
+    initRecordDatabase, getAllRecords, addRecords,
 
     appendComment
 }
