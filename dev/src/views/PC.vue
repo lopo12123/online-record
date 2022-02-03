@@ -27,13 +27,13 @@
                         <el-menu-item
                             index="Record"
                             @click="jumpTo(false, 'Record')">
-                            Record
+                            <i class="iconfont icon-record" /> Record
                         </el-menu-item>
 
                         <el-menu-item
                             index="Resize"
                             @click="jumpTo(false, 'Resize')">
-                            Resize
+                            <i class="iconfont icon-resize" /> Resize
                         </el-menu-item>
                     </el-sub-menu>
 
