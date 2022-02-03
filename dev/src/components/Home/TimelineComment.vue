@@ -46,7 +46,7 @@ export default defineComponent({
         const comments: Ref<Comment[]> = ref([])
         const reloadCommentList = () => {
             loading.value = true
-            getTargetFileJson('comment.json')
+            getTargetFileJson('comment')
                 .then(({ fileJson }) => {
                     comments.value = JSON.parse(fileJson)
                     loading.value = false
