@@ -1,0 +1,1 @@
+import{_ as e}from"./index.68b5937c.js";import{d as o,c as s,o as r}from"./vendor.522c07ad.js";const t=o({name:"Resize"}),n={id:"resize"};function a(c,i,d,_,p,m){return r(),s("div",n," resize image (todo) ")}var u=e(t,[["render",a]]);export{u as default};
