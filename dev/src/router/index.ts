@@ -21,12 +21,22 @@ const routes: RouteRecordRaw[] = [
             {
                 path: 'home',
                 name: 'Home',
-                component: () => import("@/views/Home.vue")
+                component: () => import("@/views/PC/Home.vue")
             },
             {
                 path: 'music',
                 name: 'Music',
-                component: () => import("@/views/Music.vue")
+                component: () => import("@/views/PC/Music.vue")
+            },
+            {
+                path: 'record',
+                name: 'Record',
+                component: () => import("@/views/PC/Record.vue")
+            },
+            {
+                path: 'resize',
+                name: 'Resize',
+                component: () => import("@/views/PC/Resize.vue")
             }
         ]
     },
