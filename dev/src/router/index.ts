@@ -40,6 +40,11 @@ const routes: RouteRecordRaw[] = [
                         path: 'account-check',
                         name: 'AccountCheck',
                         component: () => import("@/layouts/Record/AccountCheck.vue")
+                    },
+                    {
+                        path: 'record-overview',
+                        name: 'RecordOverview',
+                        component: () => import("@/layouts/Record/RecordOverview.vue")
                     }
                 ]
             },
