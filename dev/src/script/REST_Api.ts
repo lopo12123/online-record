@@ -1,4 +1,3 @@
-import { v4 as UUID } from "uuid";
 import axios from "axios";
 import { Buffer } from "buffer";
 import { userName, repoName, token } from "../../public/manifest.json";
