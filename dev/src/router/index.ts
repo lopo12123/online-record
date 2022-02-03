@@ -31,7 +31,17 @@ const routes: RouteRecordRaw[] = [
             {
                 path: 'record',
                 name: 'Record',
-                component: () => import("@/views/PC/Record.vue")
+                component: () => import("@/views/PC/Record.vue"),
+                redirect: {
+                    name: 'AccountCheck'
+                },
+                children: [
+                    {
+                        path: 'account-check',
+                        name: 'AccountCheck',
+                        component: () => import("@/layouts/Record/AccountCheck.vue")
+                    }
+                ]
             },
             {
                 path: 'resize',
