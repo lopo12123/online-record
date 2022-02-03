@@ -25,7 +25,7 @@
 <script lang="ts">
 import {defineComponent, Ref, ref} from "vue";
 import { ElTable, ElTableColumn, ElButton, ElMessage } from "element-plus";
-import { music } from "../../public/manifest.json";
+import { music } from "../../../public/manifest.json";
 
 interface TableDataItem {
     name: string
