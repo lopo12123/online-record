@@ -103,7 +103,7 @@ export default defineComponent({
         // endregion
 
         // region one note
-        const visible = ref(true)
+        const visible = ref(false)
         const noteStr = ref('')
         const fromStr = ref('')
         const noteStorage = localStorage.getItem('oneNote')  // last note
@@ -114,7 +114,7 @@ export default defineComponent({
             let { hitokoto, from, from_who } = noteObj
             noteStr.value = hitokoto
             fromStr.value = (from ? '-- '+from : '') + (from_who ? '《'+from_who+'》' : '')
-            visible.value = true
+            // visible.value = true
         }
         catch (e) {
             fetch('https://v1.hitokoto.cn?c=d&c=k')
