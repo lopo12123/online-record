@@ -1,23 +1,24 @@
 <template>
     <div id="home">
-        <img class="home-bg" src="@/assets/home-bg.png" alt="">
-        <el-container class="home-container">
-            <el-aside class="left-panel">
-                <div class="carousel-container">
-                    <home-carousel />
-                </div>
-                <div class="message-board-container">
-                    <timeline-comment />
-                </div>
-            </el-aside>
-            <el-main>
-                these are buttons click to jump
-                <span>todos: </span> <br>
-                <span>1. cost record </span> <br>
-                <span>2. image resize </span> <br>
-                <span>... </span>
-            </el-main>
-        </el-container>
+        <span style="color: #8c939d80"><i>Select items from side menu</i></span>
+<!--        <img class="home-bg" src="@/assets/home-bg.png" alt="">-->
+<!--        <el-container class="home-container">-->
+<!--            <el-aside class="left-panel">-->
+<!--                <div class="carousel-container">-->
+<!--                    <home-carousel />-->
+<!--                </div>-->
+<!--                <div class="message-board-container">-->
+<!--                    <timeline-comment />-->
+<!--                </div>-->
+<!--            </el-aside>-->
+<!--            <el-main>-->
+<!--                these are buttons click to jump-->
+<!--                <span>todos: </span> <br>-->
+<!--                <span>1. cost record </span> <br>-->
+<!--                <span>2. image resize </span> <br>-->
+<!--                <span>... </span>-->
+<!--            </el-main>-->
+<!--        </el-container>-->
     </div>
 </template>
 
