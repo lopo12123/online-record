@@ -156,7 +156,7 @@ const getTargetFileJson = (fileName: string): Promise<{ fileJson: string, fileSh
         })
         .then(({ tree }: TreeInfo) => {
             for(let i = 0; i < tree.length; i ++) {
-                if(tree[i].path === fileName) {
+                if(tree[i].path === fileName+'.json') {
                     fileSha = tree[i].sha
                     return _GET(`/repos/${userName}/${repoName}/git/blobs/${tree[i].sha}`)
                 }
@@ -179,7 +179,7 @@ const setTargetFileJson = (fileName: string, fileJson: string, fileSha: string) 
         content: _Base64(fileJson, 'encode').toString(),
         sha: fileSha
     }
-    return _PUT(`/repos/${userName}/${repoName}/contents/${fileName}`, body)
+    return _PUT(`/repos/${userName}/${repoName}/contents/${fileName}.json`, body)
 }
 
 /**
@@ -187,7 +187,7 @@ const setTargetFileJson = (fileName: string, fileJson: string, fileSha: string) 
  * @param newItem
  */
 const appendComment = (newItem: CommentItem) => {
-    return getTargetFileJson('comment.json')
+    return getTargetFileJson('comment')
         .then(({fileJson, fileSha}) => {
             let list: CommentItem[] = JSON.parse(fileJson)
             list.push(newItem)
