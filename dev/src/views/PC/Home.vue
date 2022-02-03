@@ -25,14 +25,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { ElContainer, ElAside, ElMain } from "element-plus";
-import HomeCarousel from "@/components/Home/HomeCarousel.vue";
-import TimelineComment from "@/components/Home/TimelineComment.vue";
+// import HomeCarousel from "@/components/PC/Home/HomeCarousel.vue";
+// import TimelineComment from "@/components/PC/Home/TimelineComment.vue";
 
 export default defineComponent({
     name: "Home",
     components: {
         ElContainer, ElAside, ElMain,
-        HomeCarousel, TimelineComment
+        // HomeCarousel, TimelineComment
     },
     setup() {
 
