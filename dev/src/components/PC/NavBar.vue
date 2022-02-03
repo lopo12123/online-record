@@ -45,7 +45,7 @@ export default defineComponent({
                     router.push({ name: 'Home' })
                     break
                 case "GitHub":
-                    window.open('https://github.com/lopo12123')
+                    window.open('https://github.com/lopo12123', '_blank')
                     break
                 case "NPM":
                     window.open('https://www.npmjs.com/~lopo12123', '_blank')
