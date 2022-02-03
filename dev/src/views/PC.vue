@@ -31,6 +31,7 @@
                         </el-menu-item>
 
                         <el-menu-item
+                            disabled
                             index="Resize"
                             @click="jumpTo(false, 'Resize')">
                             <i class="iconfont icon-resize" /> Resize
