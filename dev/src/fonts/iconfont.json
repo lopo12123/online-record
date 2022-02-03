@@ -6,6 +6,90 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "4182376",
+      "name": "AK-MN_排名_fill",
+      "font_class": "bar",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "1634068",
+      "name": "record",
+      "font_class": "record",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "10564355",
+      "name": "resize-2",
+      "font_class": "resize",
+      "unicode": "e718",
+      "unicode_decimal": 59160
+    },
+    {
+      "icon_id": "11537859",
+      "name": "record",
+      "font_class": "record1",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "1350461",
+      "name": "sq-home",
+      "font_class": "home",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "1898786",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "4766965",
+      "name": "link",
+      "font_class": "link",
+      "unicode": "e7e2",
+      "unicode_decimal": 59362
+    },
+    {
+      "icon_id": "9229177",
+      "name": "Function",
+      "font_class": "Function",
+      "unicode": "e90e",
+      "unicode_decimal": 59662
+    },
+    {
+      "icon_id": "11488038",
+      "name": "email",
+      "font_class": "email",
+      "unicode": "e74f",
+      "unicode_decimal": 59215
+    },
+    {
+      "icon_id": "11993103",
+      "name": "npm",
+      "font_class": "npm",
+      "unicode": "e71a",
+      "unicode_decimal": 59162
+    },
+    {
+      "icon_id": "12773731",
+      "name": "f-function",
+      "font_class": "f-function",
+      "unicode": "e77b",
+      "unicode_decimal": 59259
+    },
+    {
+      "icon_id": "12932042",
+      "name": "l-about",
+      "font_class": "l-about",
+      "unicode": "e789",
+      "unicode_decimal": 59273
+    },
+    {
       "icon_id": "7594045",
       "name": "24gl-pause",
       "font_class": "24gl-pause",

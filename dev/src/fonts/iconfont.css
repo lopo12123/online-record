@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3165751 */
-  src: url('iconfont.woff2?t=1643362245721') format('woff2'),
-       url('iconfont.woff?t=1643362245721') format('woff'),
-       url('iconfont.ttf?t=1643362245721') format('truetype');
+  src: url('iconfont.woff2?t=1643870426599') format('woff2'),
+       url('iconfont.woff?t=1643870426599') format('woff'),
+       url('iconfont.ttf?t=1643870426599') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,54 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bar:before {
+  content: "\e601";
+}
+
+.icon-record:before {
+  content: "\e605";
+}
+
+.icon-resize:before {
+  content: "\e718";
+}
+
+.icon-record1:before {
+  content: "\e659";
+}
+
+.icon-home:before {
+  content: "\e666";
+}
+
+.icon-github:before {
+  content: "\e6a4";
+}
+
+.icon-link:before {
+  content: "\e7e2";
+}
+
+.icon-Function:before {
+  content: "\e90e";
+}
+
+.icon-email:before {
+  content: "\e74f";
+}
+
+.icon-npm:before {
+  content: "\e71a";
+}
+
+.icon-f-function:before {
+  content: "\e77b";
+}
+
+.icon-l-about:before {
+  content: "\e789";
 }
 
 .icon-24gl-pause:before {
