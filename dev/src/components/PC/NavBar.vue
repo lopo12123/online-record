@@ -1,12 +1,15 @@
 <template>
     <div id="nav-bar">
+
+        <user-box />
+
+        <date-time-box />
+
         <div class="version-info">
             v {{ version }}
         </div>
 
         <music-player />
-
-        <date-time-box />
 
         <div class="nav-bar-button" @click="goto('Home')">
             Home
@@ -25,16 +28,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
+import { version } from "../../../package.json";
+import UserBox from "@/components/PC/UserBox.vue";
 import DateTimeBox from "@/components/PC/DateTimeBox.vue";
 import MusicPlayer from "@/components/PC/MusicPlayer.vue";
-import { version } from "../../../package.json";
 
 type ButtonType = 'Home' | 'GitHub' | 'NPM'
 
 export default defineComponent({
     name: "NavBar",
     components: {
-        DateTimeBox, MusicPlayer
+        UserBox, DateTimeBox, MusicPlayer
     },
     setup() {
         const router = useRouter()
