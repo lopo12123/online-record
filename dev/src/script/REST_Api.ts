@@ -212,7 +212,7 @@ const addNewUser = (newUser: { account: string, password: string, token: string 
 // endregion
 
 // region record manage
-interface RecordItem {
+export interface RecordItem {
     value: string
     date: string
     flow: 'IN' | 'OUT'
