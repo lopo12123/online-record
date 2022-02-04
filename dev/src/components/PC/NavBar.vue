@@ -62,7 +62,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "src/styles/mixins.scss";
+
 #nav-bar {
+    @include scrollBarStyle();
     position: relative;
     width: calc(100% - 80px);
     height: 100%;
@@ -73,6 +76,8 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     > *:not(:first-child) {
         margin-left: 30px;
