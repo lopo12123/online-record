@@ -33,14 +33,9 @@ const routes: RouteRecordRaw[] = [
                 name: 'Record',
                 component: () => import("@/views/PC/Record.vue"),
                 redirect: {
-                    name: 'AccountCheck'
+                    name: 'RecordOverview'
                 },
                 children: [
-                    {
-                        path: 'account-check',
-                        name: 'AccountCheck',
-                        component: () => import("@/layouts/Record/AccountCheck.vue")
-                    },
                     {
                         path: 'record-overview',
                         name: 'RecordOverview',
