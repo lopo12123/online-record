@@ -31,7 +31,7 @@
         <div class="overview-table-container">
             <el-table ref="tableRef" v-loading="loading"
                       :data="tableData" height="100%"
-                      border empty-text="No Record">
+                      border stripe empty-text="No Record">
                 <el-table-column width="50px" type="index" label="No." fixed="left" />
                 <el-table-column width="100px" prop="value" label="Value" />
                 <el-table-column width="200px" prop="date" label="Date" />
@@ -261,8 +261,16 @@ export default defineComponent({
                     type: newRecord.type,
                     note: newRecord.note
                 }
+                ElMessage({
+                    type: 'info',
+                    message: 'Adding new record'
+                })
                 addRecords(userState.value.userToken, recordToAdd)
                     .then(() => {
+                        ElMessage({
+                            type: 'info',
+                            message: 'Reloading record list'
+                        })
                         loadTableData()
                     })
                     .catch((err) => {
