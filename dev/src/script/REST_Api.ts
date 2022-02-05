@@ -214,7 +214,7 @@ const addNewUser = (newUser: { account: string, password: string, token: string 
 // region record manage
 export interface RecordItem {
     uuid: string
-    value: number
+    value: string | number
     date: string
     flow: 'IN' | 'OUT'
     type: string
@@ -238,8 +238,6 @@ const addRecords = (userToken: string, newRecord: RecordItem) => {
         })
 }
 // endregion
-
-
 
 interface CommentItem {
     date: string
