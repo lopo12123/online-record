@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1393771",
+      "name": "sort",
+      "font_class": "sort",
+      "unicode": "e724",
+      "unicode_decimal": 59172
+    },
+    {
+      "icon_id": "3702784",
+      "name": "交易流水统计",
+      "font_class": "navicon-jylstj",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "4936651",
+      "name": "filter-fill",
+      "font_class": "filter-fill",
+      "unicode": "e866",
+      "unicode_decimal": 59494
+    },
+    {
+      "icon_id": "6204757",
+      "name": "日期",
+      "font_class": "riqi",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "20266211",
+      "name": "钱袋",
+      "font_class": "qiandai",
+      "unicode": "e6dd",
+      "unicode_decimal": 59101
+    },
+    {
+      "icon_id": "1063557",
+      "name": "升序",
+      "font_class": "iconasc",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "1063558",
+      "name": "降序",
+      "font_class": "iconsort",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
       "icon_id": "4182376",
       "name": "AK-MN_排名_fill",
       "font_class": "bar",
