@@ -16,6 +16,16 @@
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
+
+            <el-button type="info" plain disabled>
+                <i class="iconfont icon-filter-fill" />
+                <span style="margin-left: 5px">filter</span>
+            </el-button>
+
+            <el-button type="info" plain @click="handleNew('show')">
+                <i class="iconfont icon-add" />
+                <span style="margin-left: 5px">new</span>
+            </el-button>
         </div>
 
         <div class="overview-table-container">
@@ -36,11 +46,43 @@
                 <el-table-column prop="note" label="Note" />
                 <el-table-column width="100px" label="Operate" fixed="right">
                     <template #default>
-                        <el-button type="text" size="small">Edit</el-button>
-                        <el-button type="text" size="small">Delete</el-button>
+                        <el-button type="text" size="small" disabled>Edit</el-button>
+                        <el-button type="text" size="small" disabled>Delete</el-button>
                     </template>
                 </el-table-column>
             </el-table>
+
+            <el-dialog v-model="newRecordDialogVisible" width="300px">
+                <div class="new-record-dialog">
+                    <div class="value">
+                        <span class="info-text">Value</span>
+                        <el-input-number class="item-value" v-model="newRecord.value" type="number" />
+                    </div>
+                    <div class="flow">
+                        <span class="info-text">Flow</span>
+                        <el-radio-group class="item-value" v-model="newRecord.flow">
+                            <el-radio-button label="IN" />
+                            <el-radio-button label="OUT" />
+                        </el-radio-group>
+                    </div>
+                    <div class="date">
+                        <span class="info-text">Date</span>
+                        <el-input class="item-value" v-model="newRecord.date" disabled />
+                    </div>
+                    <div class="type">
+                        <span class="info-text">Type</span>
+                        <el-input class="item-value" v-model="newRecord.type" />
+                    </div>
+                    <div class="note">
+                        <span class="info-text">Note</span>
+                        <el-input class="item-value" v-model="newRecord.note" />
+                    </div>
+                    <div class="btn-group">
+                        <el-button type="info" @click="newRecordDialogVisible = false">Cancel</el-button>
+                        <el-button type="primary" @click="handleNew('create')">Create</el-button>
+                    </div>
+                </div>
+            </el-dialog>
         </div>
 
         <div class="overview-pager-container">
@@ -53,17 +95,31 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, inject, onUnmounted, Ref, ref} from "vue";
-import {ElMessage, ElDropdown, ElDropdownMenu, ElDropdownItem, ElTable, ElTableColumn, ElButton, ElTag, ElPagination} from "element-plus";
+import {computed, defineComponent, inject, onUnmounted, reactive, Ref, ref} from "vue";
+import {
+    ElMessage,
+    ElDropdown, ElDropdownMenu, ElDropdownItem,
+    ElTable, ElTableColumn,
+    ElDialog,
+    ElInput, ElInputNumber,
+    ElRadioGroup, ElRadioButton,
+    ElButton, ElTag,
+    ElPagination
+} from "element-plus";
 import {UserState} from "@/App.vue";
-import {getAllRecords, initRecordDatabase, RecordItem} from "@/script/REST_Api";
+import {v4 as UUID} from "uuid";
+import {addRecords, getAllRecords, initRecordDatabase, RecordItem} from "@/script/REST_Api";
 import {parseDate} from "@/script";
 
 export default defineComponent({
     name: "RecordOverview",
     components: {
+        ElMessage,
         ElDropdown, ElDropdownMenu, ElDropdownItem,
         ElTable, ElTableColumn,
+        ElDialog,
+        ElInput, ElInputNumber,
+        ElRadioGroup, ElRadioButton,
         ElButton, ElTag,
         ElPagination
     },
@@ -92,52 +148,57 @@ export default defineComponent({
             return operateData.value.slice(currentPage.value * 30 - 30, currentPage.value * 30)
         })
 
-        if(!userState.value.login) {
-            ElMessage({
-                type: 'info',
-                message: 'You are not logged in, please log in first'
-            })
-        }
-        else {
-            // try get all records, and create new empty db if not exist
-            loading.value = true
-            getAllRecords(userState.value.userToken)
-                .then((recordList) => {
-                    originData.value = JSON.parse(JSON.stringify(recordList))
-                    operateData.value = JSON.parse(JSON.stringify(recordList))
-                    loading.value = false
+        // region auto get records data
+        const loadTableData = () => {
+            if(!userState.value.login) {
+                ElMessage({
+                    type: 'info',
+                    message: 'You are not logged in, please log in first'
                 })
-                .catch((err1) => {
-                    if(err1.toString() === 'Error: ENotFound') {
-                        ElMessage({
-                            type: 'info',
-                            message: 'This is the first login, the database will automatically created in few seconds'
-                        })
-                        initRecordDatabase(userState.value.userToken)
-                            .then(() => {
-                                ElMessage({
-                                    type: 'info',
-                                    message: 'Database created successfully'
-                                })
-                                loading.value = false
-                            })
-                            .catch((err2) => {
-                                ElMessage({
-                                    type: 'error',
-                                    message: err2.toString()
-                                })
-                                loading.value = false
-                            })
-                    }
-                    else {
-                        ElMessage({
-                            type: 'error',
-                            message: err1.toString()
-                        })
+            }
+            else {
+                // try get all records, and create new empty db if not exist
+                loading.value = true
+                getAllRecords(userState.value.userToken)
+                    .then((recordList) => {
+                        originData.value = JSON.parse(JSON.stringify(recordList))
+                        operateData.value = JSON.parse(JSON.stringify(recordList))
                         loading.value = false
-                    }
-                })
+                    })
+                    .catch((err1) => {
+                        if(err1.toString() === 'Error: ENotFound') {
+                            ElMessage({
+                                type: 'info',
+                                message: 'This is the first login, the database will automatically created in few seconds'
+                            })
+                            initRecordDatabase(userState.value.userToken)
+                                .then(() => {
+                                    ElMessage({
+                                        type: 'info',
+                                        message: 'Database created successfully'
+                                    })
+                                    loading.value = false
+                                })
+                                .catch((err2) => {
+                                    ElMessage({
+                                        type: 'error',
+                                        message: err2.toString()
+                                    })
+                                    loading.value = false
+                                })
+                        }
+                        else {
+                            ElMessage({
+                                type: 'error',
+                                message: err1.toString()
+                            })
+                            loading.value = false
+                        }
+                    })
+            }
         }
+        loadTableData()
+        // endregion
 
         // region banner operate
         const handleSort = (combinedArgs: string) => {
@@ -148,7 +209,7 @@ export default defineComponent({
                     break
                 case 'value':  // do value sort
                     operateData.value.sort((a, b) => {
-                        return (a.value - b.value) * (type === 'asc' ? 1 : -1)
+                        return (parseFloat(a.value) - parseFloat(b.value)) * (type === 'asc' ? 1 : -1)
                     })
                     break
                 case 'date':  // do date sort
@@ -158,11 +219,67 @@ export default defineComponent({
                     break
             }
         }
+
+        const newRecordDialogVisible = ref(false)
+        const newRecord = reactive({
+            value: 0,
+            date: parseDate(Date.now()),
+            flow: 'IN',
+            type: '',
+            note: ''
+        })
+        const handleNew = (type: 'show' | 'create') => {
+            if(type === 'show') {
+                newRecord.value = 0
+                newRecord.date = parseDate(Date.now())
+                newRecord.flow = 'IN'
+                newRecord.type = ''
+                newRecord.note = ''
+                newRecordDialogVisible.value = true
+            }
+            else if(type === 'create') {
+                newRecordDialogVisible.value = false
+                if(newRecord.value === 0) {
+                    ElMessage({
+                        type: 'info',
+                        message: 'Value cannot be 0'
+                    })
+                    return
+                }
+                if(!userState.value.login) {
+                    ElMessage({
+                        type: 'info',
+                        message: 'You are not logged in, please log in first'
+                    })
+                    return;
+                }
+                const recordToAdd: RecordItem = {
+                    uuid: UUID(),
+                    value: newRecord.value+'',
+                    date: newRecord.date,
+                    flow: newRecord.flow,
+                    type: newRecord.type,
+                    note: newRecord.note
+                }
+                addRecords(userState.value.userToken, recordToAdd)
+                    .then(() => {
+                        loadTableData()
+                    })
+                    .catch((err) => {
+                        ElMessage({
+                            type: 'error',
+                            message: err.toString()
+                        })
+                    })
+            }
+        }
         // endregion
 
         return {
             loading, tableRef,
             handleSort,
+            newRecord, handleNew,
+            newRecordDialogVisible,
             tableData,
             currentPage, totalPage
         }
@@ -206,6 +323,43 @@ export default defineComponent({
 
         .el-table {
             @include scrollBarStyle();
+        }
+
+        .new-record-dialog {
+            width: 260px;
+            height: 260px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fcfcfc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+
+            .info-text {
+                position: relative;
+                width: 60px;
+                height: 32px;
+                color: #8c939d;
+                font-weight: bold;
+                line-height: 32px;
+                display: inline-block;
+                vertical-align: top;
+            }
+            .item-value {
+                position: relative;
+                width: 200px;
+                height: 32px;
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            > .btn-group {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            }
         }
     }
 
