@@ -1,0 +1,1 @@
+import{_ as e}from"./index.845bf1e2.js";import{c as o,o as r}from"./vendor.b7d6cc5d.js";const c={name:"MRecord"},_={id:"m-record"};function d(t,s,a,n,i,p){return r(),o("div",_," mobile record view ")}var v=e(c,[["render",d],["__scopeId","data-v-57dae57e"]]);export{v as default};

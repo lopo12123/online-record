@@ -209,7 +209,7 @@ export default defineComponent({
                     break
                 case 'value':  // do value sort
                     operateData.value.sort((a, b) => {
-                        return (parseFloat(a.value) - parseFloat(b.value)) * (type === 'asc' ? 1 : -1)
+                        return (parseFloat(a.value+'') - parseFloat(b.value+'')) * (type === 'asc' ? 1 : -1)
                     })
                     break
                 case 'date':  // do date sort
@@ -257,7 +257,7 @@ export default defineComponent({
                     uuid: UUID(),
                     value: newRecord.value+'',
                     date: newRecord.date,
-                    flow: newRecord.flow,
+                    flow: newRecord.flow as ('IN' | 'OUT'),
                     type: newRecord.type,
                     note: newRecord.note
                 }
