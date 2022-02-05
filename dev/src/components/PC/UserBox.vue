@@ -171,7 +171,7 @@ export default defineComponent({
         width: 40px;
         height: 40px;
         border-radius: 20px;
-        background-color: #ffffff99;
+        background-color: #cccccc;
         color: #ffffff;
         user-select: none;
         cursor: pointer;
