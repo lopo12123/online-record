@@ -1,8 +1,6 @@
 import { createWebHashHistory, RouteRecordRaw, RouterOptions } from "vue-router";
 
 import ForkRoad from "@/views/ForkRoad.vue";
-import PC from "@/views/PC.vue";
-import Mobile from "@/views/Mobile.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -13,7 +11,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/pc',
         name: 'PC',
-        component: PC,
+        component: () => import("@/views/PC.vue"),
         redirect: {
             name: 'Home'
         },
@@ -53,9 +51,21 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/mobile',
         name: 'Mobile',
-        component: Mobile,
+        component: () => import("@/views/Mobile.vue"),
+        redirect: {
+            name: 'MHome'
+        },
         children: [
-
+            {
+                path: 'home',
+                name: 'MHome',
+                component: () => import("@/views/Mobile/MHome.vue")
+            },
+            {
+                path: 'record',
+                name: 'MRecord',
+                component: () => import("@/views/Mobile/MRecord.vue")
+            }
         ]
     }
 ]
