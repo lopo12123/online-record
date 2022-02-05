@@ -201,7 +201,7 @@ const addNewUser = (newUser: { account: string, password: string, token: string 
             let userList: UserItem[] = JSON.parse(fileJson)
 
             let exist = userList.find((item) => {
-                return (item.account === newUser.account) && (item.password === newUser.password)
+                return (item.account === newUser.account) || (item.token === newUser.token)
             })
             if(!!exist) throw new Error('EConflict')
 
