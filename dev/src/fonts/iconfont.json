@@ -6,18 +6,46 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "27490184",
+      "name": "新注册企业比例",
+      "font_class": "circle-chart-copy",
+      "unicode": "ea6f",
+      "unicode_decimal": 60015
+    },
+    {
+      "icon_id": "1467422",
+      "name": "up-chart",
+      "font_class": "up-chart",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "1898941",
+      "name": "pie-chart",
+      "font_class": "pie-chart",
+      "unicode": "e6f1",
+      "unicode_decimal": 59121
+    },
+    {
+      "icon_id": "4910619",
+      "name": "进出口登记",
+      "font_class": "jinchukoudengji",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "4678342",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e71c",
+      "unicode_decimal": 59164
+    },
+    {
       "icon_id": "1393771",
       "name": "sort",
       "font_class": "sort",
       "unicode": "e724",
       "unicode_decimal": 59172
-    },
-    {
-      "icon_id": "3702784",
-      "name": "交易流水统计",
-      "font_class": "navicon-jylstj",
-      "unicode": "e645",
-      "unicode_decimal": 58949
     },
     {
       "icon_id": "4936651",
