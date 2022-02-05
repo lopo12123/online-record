@@ -47,7 +47,7 @@ export default defineComponent({
         const userState = inject('userState') as UserState
 
         const loading = ref(false)
-        const tableRef: Ref<ElTable | null> = ref(null)
+        const tableRef: Ref<typeof ElTable | null> = ref(null)
         const tableData: Ref<RecordItem[]> = ref([])
         const currentPage = ref(1)
         const totalPage = ref(0)
