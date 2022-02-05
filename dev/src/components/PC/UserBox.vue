@@ -95,6 +95,10 @@ export default defineComponent({
                                     account: exist.account.slice(0, 1).toUpperCase(),
                                     userToken: exist.token
                                 }
+                                ElMessage({
+                                    type: 'info',
+                                    message: `Welcome Back, ${exist.account}!`
+                                })
                             }
                             else {
                                 ElMessage({
