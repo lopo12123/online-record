@@ -1,0 +1,1 @@
+function s(e){switch(typeof e){case"string":return new Date(e).getTime();case"number":const t=new Date;t.setTime(e);const r=t.toLocaleDateString("zh-cn").split("/").map(n=>parseInt(n)<10?"0"+n:n).join("-"),a=t.toLocaleTimeString("zh-cn",{hour12:!1});return r+" "+a;default:throw new Error("EType")}}export{s as p};

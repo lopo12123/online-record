@@ -1,0 +1,1 @@
+import{_ as o}from"./index.87f993cf.js";import{d as t,c as _,h as n,i as r,o as s}from"./vendor.4ddb49f8.js";const a=t({name:"Mobile"}),c={id:"mobile"};function d(i,p,f,l,m,v){const e=r("router-view");return s(),_("div",c,[n(e)])}var x=o(a,[["render",d],["__scopeId","data-v-6f777276"]]);export{x as default};
