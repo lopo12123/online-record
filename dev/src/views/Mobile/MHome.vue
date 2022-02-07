@@ -5,7 +5,7 @@
         </div>
 
         <div class="record">
-            <el-button type="info" @click="gotoPage('Record')">Enter</el-button>
+            <el-button type="info" @click="gotoPage('Record')">New</el-button>
         </div>
 
         <div class="rest">

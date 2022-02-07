@@ -24,6 +24,9 @@
                 <el-button style="width: 100%;" type="success" @click="createNewRecord">Submit</el-button>
             </div>
         </div>
+        <div class="record-overview">
+            <recent-record />
+        </div>
     </div>
 </template>
 
@@ -31,7 +34,8 @@
 import {defineComponent, inject, reactive, Ref} from "vue";
 import {UserState} from "@/App.vue";
 import {useRouter} from "vue-router";
-import {ElButton, ElInput, ElMessage, ElNotification, ElRadioButton, ElRadioGroup} from "element-plus";
+import {ElButton, ElInput, ElNotification, ElRadioButton, ElRadioGroup} from "element-plus";
+import RecentRecord from "@/components/Mobile/MRecord/RecentRecord.vue";
 import {addRecords, RecordItem} from "@/script/REST_Api";
 import {v4 as UUID} from "uuid";
 import {parseDate} from "@/script";
@@ -41,6 +45,7 @@ export default defineComponent({
     components: {
         ElInput, ElButton,
         ElRadioGroup, ElRadioButton,
+        RecentRecord
     },
     setup() {
         const router = useRouter()
@@ -109,6 +114,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "src/styles/mixins.scss";
+
 #m-record {
     position: relative;
     width: 100vw;
@@ -150,6 +157,16 @@ export default defineComponent({
                 vertical-align: top;
             }
         }
+    }
+    > .record-overview {
+        @include scrollBarStyle();
+        position: relative;
+        width: 260px;
+        max-width: 70vw;
+        max-height: 200px;
+        margin-top: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 }
 </style>
