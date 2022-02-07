@@ -7,6 +7,10 @@
         <div class="record">
             <el-button type="info" @click="gotoPage('Record')">Enter</el-button>
         </div>
+
+        <div class="rest">
+            ...
+        </div>
     </div>
 </template>
 
